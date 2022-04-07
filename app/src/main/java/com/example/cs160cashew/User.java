@@ -11,8 +11,8 @@ public class User {
 
     User(String s){
         name = s;
-        budgetList.add(new Budget(new Name("Food Budget"), new Category("testCategory"), new Limit(300)));
-        budgetList.add(new Budget(new Name("Miscellaneous"), new Category("testCategory2"), new Limit(500)));
+        budgetList.add(new Budget("Food Budget", new Category("testCategory"), 300));
+        budgetList.add(new Budget("Miscellaneous", new Category("testCategory2"), 500));
     }
 
     public void addBudget(Budget b){

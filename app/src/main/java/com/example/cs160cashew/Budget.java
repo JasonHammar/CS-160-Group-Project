@@ -1,34 +1,75 @@
 package com.example.cs160cashew;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Budget {
+public class Budget implements Parcelable {
 
-    private Name name;
+    private String name;
     private List<Category> categoryList = new ArrayList<Category>();
-    private Limit limit;
+    private int limit;
 
-    Budget(Name n, Category c, Limit l){
+    Budget(String n, Category c, int l){
         name = n;
         categoryList.add(c);
         limit = l;
     }
 
-    Budget(Name n, Limit l){
+    Budget(String n, int l){
         name = n;
         limit = l;
     }
+
+    protected Budget(Parcel in) {
+
+        name = in.readString();
+        in.readTypedList(categoryList, Category.CREATOR);
+        limit = in.readInt();
+
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(name);
+        dest.writeTypedList(categoryList);
+        dest.writeInt(limit);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Budget> CREATOR = new Creator<Budget>() {
+        @Override
+        public Budget createFromParcel(Parcel in) {
+            return new Budget(in);
+        }
+
+        @Override
+        public Budget[] newArray(int size) {
+            return new Budget[size];
+        }
+    };
 
     public void addCategory(Category c){
         categoryList.add(c);
     }
 
     public String getName(){
-        return name.getName();
+        return name;
     }
 
     public int getLimit(){
-        return limit.getAmount();
+        return limit;
+    }
+
+    public List<Category> getCategoryList(){
+        return categoryList;
     }
 }
