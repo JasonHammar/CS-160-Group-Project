@@ -19,12 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HomePage extends AppCompatActivity {
 
-    User user = new User("Test User");
+
+
     private RecyclerView budgetListRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     public void onCreate(Bundle savedInstanceState){
+
+
+
+        User user;
+
+        Intent intentApp = getIntent();
+        user = intentApp.getParcelableExtra("user");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
@@ -34,7 +43,6 @@ public class HomePage extends AppCompatActivity {
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
 
         budgetListRecyclerView.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(this);
         budgetListRecyclerView.setLayoutManager(layoutManager);
 
@@ -54,6 +62,10 @@ public class HomePage extends AppCompatActivity {
                 final EditText input = new EditText(HomePage.this);
                 final EditText input2 = new EditText(HomePage.this);
 
+
+
+
+
                 input.setHint("Budget Name");
                 input2.setHint("Budget Limit");
 
@@ -69,6 +81,8 @@ public class HomePage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
+
+                        System.out.println(user.getBudgetList());
                     }
                 });
 

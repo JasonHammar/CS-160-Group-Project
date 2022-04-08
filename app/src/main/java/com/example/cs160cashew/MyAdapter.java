@@ -76,7 +76,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     System.out.println(budget);
                     budgetClick = new Intent(v.getContext(), BudgetPage.class);
                     budgetClick.putExtra("budgetItem", budget);
+                    System.out.println(budget.getCategoryList());
                     holder.layout.getContext().startActivity(budgetClick);
+
 
 
                 }
