@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cs160cashew">
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +22,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomePage">
-        </activity>
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
         <activity
-            android:name=".BudgetPage">
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".HomePage" />
+        <activity android:name=".BudgetPage" />
     </application>
 
 </manifest>

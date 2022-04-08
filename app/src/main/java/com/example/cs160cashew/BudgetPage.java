@@ -42,7 +42,7 @@ public class BudgetPage extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         budgetListRecyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MySecondAdapter(budget.getCategoryList());
+        //mAdapter = new MySecondAdapter(budget.getCategoryList());
 
         budgetListRecyclerView.setAdapter(mAdapter);
 
