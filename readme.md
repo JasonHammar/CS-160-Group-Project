@@ -1,4 +1,4 @@
-Group members: Jason Hammar, Andrei Titoruk, Min-Yuan Lee, Aidan Kormanik, Margaret Li, Mihn-Hung Ngyuen, Bernard Tan.
+Group members: Jason Hammar, Andrei Titoruk, Min-Yuan Lee, Aidan Kormanik, Margaret Li, Minh Hung Nguyen, Bernard Tan.
 
 Link to Repository: https://github.com/JasonHammar/CS-160-Group-Project
 
