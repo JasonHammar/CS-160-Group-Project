@@ -4,6 +4,7 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,12 +21,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView txtHeader;
+        public TextView limit;
         public View layout;
         private ImageView icon;
         public ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
+            limit = (TextView) v.findViewById(R.id.value);
         }
     }
 
@@ -56,18 +59,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final String name = values.get(position).getName();
+        final int lim = values.get(position).getLimit();
+        final Budget budget = values.get(position);
+
         holder.txtHeader.setText(name);
+
+        holder.limit.setText("$" + Integer.toString(lim));
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent fruitClick = null;
+
+                Intent budgetClick = null;
 
                 try{
+                    System.out.println(budget);
+                    budgetClick = new Intent(v.getContext(), BudgetPage.class);
+                    budgetClick.putExtra("budgetItem", budget);
+                    holder.layout.getContext().startActivity(budgetClick);
 
 
                 }
                 catch (Exception e) {
+
+                    System.out.println(e);
 
 
                 }

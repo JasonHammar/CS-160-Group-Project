@@ -21,6 +21,9 @@
         <activity
             android:name=".HomePage">
         </activity>
+        <activity
+            android:name=".BudgetPage">
+        </activity>
     </application>
 
 </manifest>

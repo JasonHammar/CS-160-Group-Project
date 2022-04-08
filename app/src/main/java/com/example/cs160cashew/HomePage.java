@@ -67,7 +67,7 @@ public class HomePage extends AppCompatActivity {
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        user.addBudget(new Budget(new Name(input.getText().toString()), new Limit(Integer.parseInt(input2.getText().toString()))));
+                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
                     }
                 });
