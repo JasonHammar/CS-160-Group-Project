@@ -71,7 +71,6 @@ public class BudgetPage extends AppCompatActivity {
                         budget.addCategory(new Category(input.getText().toString()));
                         budgetListRecyclerView.setAdapter(mAdapter);
 
-                        System.out.println(budget.getCategoryList());
                     }
                 });
 
@@ -93,7 +92,6 @@ public class BudgetPage extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                System.out.println(budget.getCategoryList());
                 finish();
             }
         });

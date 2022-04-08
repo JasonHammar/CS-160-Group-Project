@@ -82,7 +82,6 @@ public class HomePage extends AppCompatActivity {
                         user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
 
-                        System.out.println(user.getBudgetList());
                     }
                 });
 
@@ -94,6 +93,15 @@ public class HomePage extends AppCompatActivity {
                 });
 
                 alertDialog.show();
+            }
+        });
+
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
