@@ -86,6 +86,16 @@ public class BudgetPage extends AppCompatActivity {
 
             }
         });
+        
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                System.out.println(budget.getCategoryList());
+                finish();
+            }
+        });
 
         Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
