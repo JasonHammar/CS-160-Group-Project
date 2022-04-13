@@ -97,7 +97,7 @@ public class BudgetPage extends AppCompatActivity {
             }
         });
 
-        Button back = (Button) findViewById(R.id.back);
+        //Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
 
             @Override
