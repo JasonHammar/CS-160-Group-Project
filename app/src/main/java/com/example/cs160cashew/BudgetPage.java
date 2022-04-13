@@ -51,6 +51,38 @@ public class BudgetPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                AlertDialog alertDialog = new AlertDialog.Builder(BudgetPage.this).create();
+                alertDialog.setTitle("Create A New Category");
+
+                LinearLayout layout1 = new LinearLayout(BudgetPage.this);
+                layout1.setOrientation(LinearLayout.VERTICAL);
+                final EditText input = new EditText(BudgetPage.this);
+
+                input.setHint("Category Name");
+
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
+                layout1.addView(input);
+                alertDialog.setView(layout1);
+
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        budget.addCategory(new Category(input.getText().toString()));
+                        budgetListRecyclerView.setAdapter(mAdapter);
+
+                    }
+                });
+
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+
 
             }
         });
@@ -64,6 +96,16 @@ public class BudgetPage extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
 
     }
