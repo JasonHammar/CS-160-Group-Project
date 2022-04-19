@@ -61,6 +61,7 @@ public class HomePage extends AppCompatActivity {
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(HomePage.this);
                 final EditText input2 = new EditText(HomePage.this);
+                //final EditText input3 = new EditText(HomePage.this);
 
 
 
@@ -68,6 +69,7 @@ public class HomePage extends AppCompatActivity {
 
                 input.setHint("Budget Name");
                 input2.setHint("Budget Limit");
+                //input3.setHint("");
 
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 input2.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -79,7 +81,7 @@ public class HomePage extends AppCompatActivity {
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString())));
+                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString()), Double.parseDouble(input2.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
 
                     }

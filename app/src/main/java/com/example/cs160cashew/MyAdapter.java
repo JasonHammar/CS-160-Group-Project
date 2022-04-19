@@ -22,6 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // each data item is just a string in this case
         public TextView txtHeader;
         public TextView limit;
+        public TextView progress;
         public View layout;
         private ImageView icon;
         public ViewHolder(View v) {
@@ -29,6 +30,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             limit = (TextView) v.findViewById(R.id.value);
+            //progress = (TextView) v.findViewById(R.id.budgetProgress);
         }
     }
 
@@ -60,11 +62,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final String name = values.get(position).getName();
         final int lim = values.get(position).getLimit();
+        //final float prog = values.get(position).getProgress();
         final Budget budget = values.get(position);
 
         holder.txtHeader.setText(name);
 
         holder.limit.setText("$" + Integer.toString(lim));
+        //holder.progress.setText("Progress $" + Float.toString(prog));
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

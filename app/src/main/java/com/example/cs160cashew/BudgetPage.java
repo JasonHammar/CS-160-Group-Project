@@ -20,6 +20,7 @@ public class BudgetPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +32,11 @@ public class BudgetPage extends AppCompatActivity {
 
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         TextView budgetLimit = (TextView) findViewById(R.id.budgetLimit);
+        TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
 
         welcomeText.setText(budget.getName());
         budgetLimit.setText("$" + budget.getLimit());
+        budgetProgress.setText(("Progress: $" + budget.getProgress()));
 
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
 
@@ -42,11 +45,12 @@ public class BudgetPage extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         budgetListRecyclerView.setLayoutManager(layoutManager);
 
-        //mAdapter = new MySecondAdapter(budget.getCategoryList());
+        mAdapter = new MySecondAdapter(budget.getCategoryList());
 
         budgetListRecyclerView.setAdapter(mAdapter);
 
         Button addButton = (Button) findViewById(R.id.addCategoryButton);
+        Button updateProgress = (Button) findViewById(R.id.updateProgress);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +74,49 @@ public class BudgetPage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         budget.addCategory(new Category(input.getText().toString()));
                         budgetListRecyclerView.setAdapter(mAdapter);
+
+                    }
+                });
+
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+
+
+            }
+        });
+
+        updateProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog alertDialog = new AlertDialog.Builder(BudgetPage.this).create();
+                alertDialog.setTitle("How much money did you spend?");
+
+                LinearLayout layout1 = new LinearLayout(BudgetPage.this);
+                layout1.setOrientation(LinearLayout.VERTICAL);
+                final EditText input = new EditText(BudgetPage.this);
+
+                input.setHint("Money spent.");
+
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+
+                layout1.addView(input);
+                alertDialog.setView(layout1);
+
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Update", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        budget.updateProgress(Double.parseDouble(input.getText().toString()));
+                        budgetProgress.setText("Progress: $" + budget.getProgress());
+                        //budget.addCategory(new Category(input.getText()
+                        // .toString()));
+                        //budgetListRecyclerView.setAdapter(mAdapter);
 
                     }
                 });
