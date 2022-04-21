@@ -19,6 +19,13 @@ public class BaseActivity extends AppCompatActivity implements LogoutListener {
     }
 
     @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+
+        ((MyApp) getApplication()).onUserInteracted();
+    }
+
+    @Override
     public void onSessionLogout() {
         finish();
         startActivity(new Intent(this, Login.class));
