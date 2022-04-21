@@ -14,8 +14,12 @@
         <entry key="..\:/Users/Margaret/AndroidStudioProjects/cs160cashew/app/src/main/res/layout/budget_creation_layout.xml" value="0.21105072463768115" />
         <entry key="..\:/Users/Margaret/AndroidStudioProjects/cs160cashew/app/src/main/res/layout/budget_layout.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/Margaret/AndroidStudioProjects/cs160cashew/app/src/main/res/layout/home_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.115625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.115625" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.45319976806640627" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/budget_layout.xml" value="0.115625" />
+        <entry key="app/src/main/res/layout/home_page.xml" value="0.115625" />
       </map>
     </option>
   </component>
