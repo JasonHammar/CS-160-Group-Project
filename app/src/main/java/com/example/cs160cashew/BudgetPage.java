@@ -1,5 +1,6 @@
 package com.example.cs160cashew;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -20,23 +21,30 @@ public class BudgetPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_layout);
         Budget budget;
 
+
         Intent intentApp = getIntent();
+        //Intent prog = getIntent();
         budget = intentApp.getParcelableExtra("budgetItem");
+        //String progressOne;
+        //progressOne = prog.getStringExtra("budgetProgress");
+
+        //double progressTwo = Double.parseDouble(progressOne);
 
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         TextView budgetLimit = (TextView) findViewById(R.id.budgetLimit);
         TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
 
+
         welcomeText.setText(budget.getName());
         budgetLimit.setText("$" + budget.getLimit());
         budgetProgress.setText(("Progress: $" + budget.getProgress()));
+
 
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
 
@@ -139,7 +147,9 @@ public class BudgetPage extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                System.out.println(budget.getCategoryList());
+                setResult(Activity.RESULT_OK,
+                        new Intent().putExtra("budgetItem", budget));
+                //new Intent().putExtra("budgetProgress", budget.getProgress());
                 finish();
             }
         });
@@ -157,5 +167,3 @@ public class BudgetPage extends AppCompatActivity {
 
     }
 }
-
-
