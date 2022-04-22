@@ -12,7 +12,7 @@ public class MyApp extends Application {
 
     public void startUserSession() {
         cancelTimer();
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
