@@ -11,16 +11,18 @@ public class Budget implements Parcelable {
     private String name;
     private List<Category> categoryList = new ArrayList<Category>();
     private int limit;
-
-    Budget(String n, Category c, int l){
+    private double progress;
+    Budget(String n, Category c, int l, double p){
         name = n;
         categoryList.add(c);
         limit = l;
+        progress = p;
     }
 
-    Budget(String n, int l){
+    Budget(String n, int l, double p){
         name = n;
         limit = l;
+        progress = p;
     }
 
     public void setName(String s){
@@ -36,6 +38,7 @@ public class Budget implements Parcelable {
         name = in.readString();
         in.readTypedList(categoryList, Category.CREATOR);
         limit = in.readInt();
+        progress = in.readDouble();
 
     }
 
@@ -46,6 +49,8 @@ public class Budget implements Parcelable {
         dest.writeString(name);
         dest.writeTypedList(categoryList);
         dest.writeInt(limit);
+
+        dest.writeDouble(progress);
     }
 
     @Override
@@ -69,12 +74,18 @@ public class Budget implements Parcelable {
         categoryList.add(c);
     }
 
+    public void updateProgress(double newProgress){progress -= newProgress;}
+
     public String getName(){
         return name;
     }
 
     public int getLimit(){
         return limit;
+    }
+
+    public double getProgress(){
+        return progress;
     }
 
     public List<Category> getCategoryList(){
