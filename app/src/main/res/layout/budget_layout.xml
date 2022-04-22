@@ -48,6 +48,18 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <Button
+        android:id="@+id/editBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="1"
+        android:textSize="14dp"
+        android:text="Edit Budget" />
+
+
+
     <LinearLayout
         android:layout_weight="1"
         android:layout_gravity="center|bottom"

@@ -22,11 +22,12 @@ public class HomePage extends BaseActivity{
 
 
     private RecyclerView budgetListRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private MyAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public void onCreate(Bundle savedInstanceState){
 
+
+    public void onCreate(Bundle savedInstanceState){
 
 
         User user;
@@ -61,9 +62,6 @@ public class HomePage extends BaseActivity{
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(HomePage.this);
                 final EditText input2 = new EditText(HomePage.this);
-
-
-
 
 
                 input.setHint("Budget Name");
@@ -101,17 +99,25 @@ public class HomePage extends BaseActivity{
 
             @Override
             public void onClick(View view) {
+                setResult(Activity.RESULT_OK,
+                        new Intent().putExtra("user", user));
                 finish();
             }
         });
 
 
-
-
-
-
-
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 222 && resultCode == Activity.RESULT_OK){
+            mAdapter.onActivityResult(requestCode, resultCode, data);
+            budgetListRecyclerView.setAdapter(mAdapter);
+        }
+    }
+
+
 
 
 }
