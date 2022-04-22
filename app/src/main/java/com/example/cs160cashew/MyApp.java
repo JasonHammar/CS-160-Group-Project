@@ -9,6 +9,7 @@ public class MyApp extends Application {
 
     private LogoutListener listener;
     private Timer timer;
+    private int seconds_logout = 60000;
 
     public void startUserSession() {
         cancelTimer();
@@ -18,7 +19,7 @@ public class MyApp extends Application {
             public void run() {
                 listener.onSessionLogout();
             }
-        }, 5000);
+        }, seconds_logout);
     }
 
     private void cancelTimer() {
