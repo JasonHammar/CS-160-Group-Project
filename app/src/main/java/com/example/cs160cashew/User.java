@@ -43,8 +43,16 @@ public class User implements Parcelable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List getBudgetList(){
         return budgetList;
+    }
+
+    public void setBudgetList(List budgetList) {
+        this.budgetList = budgetList;
     }
 
     @Override
