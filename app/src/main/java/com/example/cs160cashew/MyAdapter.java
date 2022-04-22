@@ -3,8 +3,11 @@ package com.example.cs160cashew;
 import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +18,8 @@ import android.widget.TextView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Budget> values;
+    private int temp;
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -33,6 +38,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
+
+
     public void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);
@@ -40,6 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(List<Budget> myDataset) {
         values = myDataset;
+
     }
     // Create new views (invoked by the layout manager)
     @Override
@@ -52,6 +60,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
+
+
+
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
@@ -73,12 +84,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Intent budgetClick = null;
 
                 try{
-                    System.out.println(budget);
+
+                    temp = holder.getAdapterPosition();
                     budgetClick = new Intent(v.getContext(), BudgetPage.class);
                     budgetClick.putExtra("budgetItem", budget);
                     System.out.println(budget.getCategoryList());
-                    holder.layout.getContext().startActivity(budgetClick);
 
+                    ((Activity) holder.layout.getContext()).startActivityForResult(budgetClick, 222);
 
 
                 }
@@ -90,13 +102,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
 
             }
+
+
         });
 
-
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       Budget budget = data.getParcelableExtra("budgetItem");
+       values.set(temp, budget);
+    }
+
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return values.size();
     }
+
+
+
+
 }

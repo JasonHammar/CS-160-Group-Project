@@ -23,6 +23,14 @@ public class Budget implements Parcelable {
         limit = l;
     }
 
+    public void setName(String s){
+        name = s;
+    }
+
+    public void setLimit(int i){
+        limit = i;
+    }
+
     protected Budget(Parcel in) {
 
         name = in.readString();
