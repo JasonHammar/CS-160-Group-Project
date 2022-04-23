@@ -41,7 +41,11 @@ public class BudgetPage extends AppCompatActivity {
         double progress = budget.getProgress();
 
         //double progressTwo = Double.parseDouble(progressOne);
-
+        Calendar c = Calendar.getInstance();
+        // c.set(Calendar.DAY_OF_MONTH, 1);
+        if(c.get(Calendar.DAY_OF_MONTH) == 1){
+            budget.setProgress(budget.getLimit());
+        }
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         TextView budgetLimit = (TextView) findViewById(R.id.budgetLimit);
         TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
