@@ -91,4 +91,8 @@ public class Budget implements Parcelable {
     public List<Category> getCategoryList(){
         return categoryList;
     }
+
+    public void setProgress(double progress) {
+        this.progress = progress;
+    }
 }
