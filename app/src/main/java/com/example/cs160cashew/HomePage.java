@@ -62,24 +62,26 @@ public class HomePage extends BaseActivity{
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(HomePage.this);
                 final EditText input2 = new EditText(HomePage.this);
-                //final EditText input3 = new EditText(HomePage.this);
+                final EditText input3 = new EditText(HomePage.this);
 
 
                 input.setHint("Budget Name");
                 input2.setHint("Budget Limit");
-                //input3.setHint("");
+                input3.setHint("Day of Month for Budget to Reset");
 
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 input2.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input3.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
                 layout1.addView(input);
                 layout1.addView(input2);
+                layout1.addView(input3);
                 alertDialog.setView(layout1);
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString()), Double.parseDouble(input2.getText().toString())));
+                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString()), Double.parseDouble(input2.getText().toString()), Integer.parseInt(input3.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
 
                     }
