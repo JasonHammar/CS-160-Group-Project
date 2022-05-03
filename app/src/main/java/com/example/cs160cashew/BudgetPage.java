@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.net.Inet4Address;
+import java.util.Calendar;
 
 public class BudgetPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
@@ -27,6 +28,7 @@ public class BudgetPage extends AppCompatActivity {
 
     Budget budget;
 
+    private int monthDay;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_layout);
@@ -38,22 +40,30 @@ public class BudgetPage extends AppCompatActivity {
         budget = intentApp.getParcelableExtra("budgetItem");
         //String progressOne;
         //progressOne = prog.getStringExtra("budgetProgress");
-        double progress = budget.getProgress();
 
         //double progressTwo = Double.parseDouble(progressOne);
-        Calendar c = Calendar.getInstance();
-        // c.set(Calendar.DAY_OF_MONTH, 1);
-        if(c.get(Calendar.DAY_OF_MONTH) == 1){
-            budget.setProgress(budget.getLimit());
-        }
+
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         TextView budgetLimit = (TextView) findViewById(R.id.budgetLimit);
         TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
 
 
+        Calendar c = Calendar.getInstance();
+
+        monthDay = budget.getMonthDay();
+
+        if(monthDay > Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH))
+            monthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
+        
+        if(monthDay == c.get(Calendar.DAY_OF_MONTH)){
+            budget.setProgress(budget.getLimit());
+        }
+
         welcomeText.setText(budget.getName());
         budgetLimit.setText("$" + budget.getLimit());
         budgetProgress.setText(("Progress: $" + budget.getProgress()));
+
+
 
 
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
@@ -133,7 +143,6 @@ public class BudgetPage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         budget.updateProgress(Double.parseDouble(input.getText().toString()));
                         budgetProgress.setText("Progress: $" + budget.getProgress());
-                        budget.setProgress(budget.getProgress());
                         //budget.addCategory(new Category(input.getText()
                         // .toString()));
                         //budgetListRecyclerView.setAdapter(mAdapter);
@@ -154,7 +163,7 @@ public class BudgetPage extends AppCompatActivity {
             }
         });
         
-
+        
 
 
         
