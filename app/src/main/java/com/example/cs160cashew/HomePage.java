@@ -51,6 +51,8 @@ public class HomePage extends BaseActivity{
 
         budgetListRecyclerView.setAdapter(mAdapter);
 
+        
+
         Button addButton = (Button) findViewById(R.id.addBudgetButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
