@@ -10,7 +10,7 @@ import java.util.List;
 public class UserTest extends junit.framework.TestCase{
     User user;
     String name = "Test";
-    List<Budget> testList = new ArrayList<Budget>();
+    List<Budget> testList = new ArrayList<>();
 
     protected void setUp() {
         user = new User(name);
@@ -29,7 +29,7 @@ public class UserTest extends junit.framework.TestCase{
 
     @Test
     public void testAddBudget() {
-        user.addBudget(new Budget("Test Budget", new Category("Test Category"), 240));
+        user.addBudget(new Budget("Test Budget", new Category("Test Category"), 1000,240));
         assertNotEquals(user.getBudgetList(), testList);
     }
 }
