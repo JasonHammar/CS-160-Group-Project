@@ -71,6 +71,7 @@ public class Register extends AppCompatActivity {
                        if(task.isSuccessful()){
                            Toast.makeText(Register.this,"User created",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                           sendEmailVerification();
                        }
                        else{
                            Toast.makeText(Register.this,"Error occur" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -88,5 +89,27 @@ public class Register extends AppCompatActivity {
         });
     }
 
-
+    private void sendEmailVerification()
+    {
+        FirebaseUser firebaseUser=fAuth.getCurrentUser();
+        if(firebaseUser!=null)
+        {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                    {
+                        Toast.makeText(Register.this,"Registration Successful.Verification mail sent successfully..",Toast.LENGTH_LONG).show();
+                        fAuth.signOut();
+                        finish();
+                        startActivity(new Intent(Register.this,Login.class));
+                    }
+                    else
+                    {
+                        Toast.makeText(Register.this,"Error occurred sending verification mail..",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
 }
