@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     EditText mFullName, mEmail, mPassword, mPhone;
@@ -46,6 +49,7 @@ public class Register extends AppCompatActivity {
         mRegisterBtn.setOnClickListener (new View.OnClickListener() {
            @Override
             public void onClick(View v){
+
               String email = mEmail.getText().toString().trim();
               String password = mPassword.getText().toString().trim();
 
@@ -62,6 +66,16 @@ public class Register extends AppCompatActivity {
                    mPassword.setError("Password must be more than 6 letters");
                    return;
                }
+
+               String name = mFullName.getText().toString().trim();
+               String phone = mPhone.getText().toString().trim();
+
+               HashMap<String, Object> map = new HashMap<>();
+               map.put("Name", name);
+               map.put("Email", email);
+               map.put("Phone", phone);
+
+               FirebaseDatabase.getInstance().getReference().child("User Info").push().updateChildren(map);
 
                //register the user to firebase
                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
