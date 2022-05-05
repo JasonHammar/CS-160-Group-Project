@@ -72,7 +72,6 @@ public class Register extends AppCompatActivity {
                            Toast.makeText(Register.this,"User created",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                            sendEmailVerification();
-                           //FirebaseUser mUser=fAuth.getCurrentUser();
                        }
                        else{
                            Toast.makeText(Register.this,"Error occur" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();

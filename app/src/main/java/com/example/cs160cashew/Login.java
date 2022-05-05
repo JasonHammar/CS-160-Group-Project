@@ -131,12 +131,12 @@ public class Login extends AppCompatActivity {
         if(emailflag)
         {
             finish();
-            Toast.makeText(getApplicationContext(),"Login Successful.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(Login.this,MainActivity.class));
         }
         else
         {
-            Toast.makeText(this,"Please verify your email.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please verify your email, thank you.",Toast.LENGTH_LONG).show();
             fAuth.signOut();
         }
     }
