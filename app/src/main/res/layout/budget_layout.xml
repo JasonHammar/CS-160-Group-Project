@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="20">
+    android:weightSum="20"
+    android:id="@+id/linear_layout">
 
     <TextView
         android:id="@+id/WelcomeText"
