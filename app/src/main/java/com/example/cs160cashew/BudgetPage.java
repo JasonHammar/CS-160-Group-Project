@@ -79,6 +79,49 @@ public class BudgetPage extends AppCompatActivity {
 
         Button addButton = (Button) findViewById(R.id.addCategoryButton);
         Button updateProgress = (Button) findViewById(R.id.updateProgress);
+        Button editCategory = (Button) findViewById(R.id.editBudget);
+        editCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(BudgetPage.this).create();
+                alertDialog.setTitle("Change Budget Limit?");
+                LinearLayout layout1 = new LinearLayout(BudgetPage.this);
+                layout1.setOrientation(LinearLayout.VERTICAL);
+                final EditText input = new EditText(BudgetPage.this);
+                int origLim = budget.getLimit();
+                double currentProgress = budget.getProgress();
+                input.setHint("New Limit");
+
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+
+                layout1.addView(input);
+                alertDialog.setView(layout1);
+
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        budget.setLimit(Integer.parseInt(input.getText().toString()));
+                        budgetLimit.setText("$" + budget.getLimit());
+                        if(budget.getLimit() <= origLim && budget.getProgress() >= budget.getLimit()){
+                            budget.setProgress(budget.getLimit());
+                            budgetProgress.setText("Progress: $" + budget.getProgress());
+                        }else if(budget.getLimit() >= origLim){
+                            double progDiff = budget.getLimit() - origLim;
+                            budget.setProgress((progDiff + currentProgress));
+                            budgetProgress.setText("Progress: $" + budget.getProgress());
+                        }
+                    }
+                });
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,9 +186,7 @@ public class BudgetPage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         budget.updateProgress(Double.parseDouble(input.getText().toString()));
                         budgetProgress.setText("Progress: $" + budget.getProgress());
-                        //budget.addCategory(new Category(input.getText()
-                        // .toString()));
-                        //budgetListRecyclerView.setAdapter(mAdapter);
+
 
                     }
                 });
