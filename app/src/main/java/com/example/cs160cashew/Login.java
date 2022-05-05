@@ -124,21 +124,5 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
-    private void checkEmailVerification(){
-        FirebaseUser firebaseUser=fAuth.getInstance().getCurrentUser();
-        Boolean emailflag=firebaseUser.isEmailVerified();
-        if(emailflag)
-        {
-            finish();
-            Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Login.this,MainActivity.class));
-        }
-        else
-        {
-            Toast.makeText(this,"Please verify your email, thank you.",Toast.LENGTH_LONG).show();
-            fAuth.signOut();
-        }
-    }
-
+    
 }
