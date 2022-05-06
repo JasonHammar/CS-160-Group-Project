@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class HomePage extends BaseActivity{
 
@@ -38,6 +41,7 @@ public class HomePage extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
+
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         welcomeText.setText("Welcome " + user.getName() + "!");
 
@@ -51,6 +55,8 @@ public class HomePage extends BaseActivity{
 
         budgetListRecyclerView.setAdapter(mAdapter);
 
+        
+
         Button addButton = (Button) findViewById(R.id.addBudgetButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,24 +68,26 @@ public class HomePage extends BaseActivity{
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(HomePage.this);
                 final EditText input2 = new EditText(HomePage.this);
-                //final EditText input3 = new EditText(HomePage.this);
+                final EditText input3 = new EditText(HomePage.this);
 
 
                 input.setHint("Budget Name");
                 input2.setHint("Budget Limit");
-                //input3.setHint("");
+                input3.setHint("Day of Month for Budget to Reset");
 
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 input2.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input3.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
                 layout1.addView(input);
                 layout1.addView(input2);
+                layout1.addView(input3);
                 alertDialog.setView(layout1);
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString()), Double.parseDouble(input2.getText().toString())));
+                        user.addBudget(new Budget(input.getText().toString(), Integer.parseInt(input2.getText().toString()), Double.parseDouble(input2.getText().toString()), Integer.parseInt(input3.getText().toString())));
                         budgetListRecyclerView.setAdapter(mAdapter);
 
                     }

@@ -13,11 +13,14 @@ public class BudgetTest extends junit.framework.TestCase {
     Category category = new Category("Test category");
     Category extraCategory = new Category("Extra category");
     List<Category> saved;
-    int progress = 240;
-    int limit = 1000;
+
+    int limit = 240;
+    double progress = 240.0;
+    int monthDay = 4;
 
     protected void setUp() {
-        budget = new Budget(name, category, limit, progress);
+        budget = new Budget(name, category, limit, progress, monthDay);
+
     }
 
     @Test

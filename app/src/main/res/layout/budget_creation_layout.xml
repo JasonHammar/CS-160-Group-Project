@@ -7,11 +7,12 @@
         android:id="@+id/BudgetName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_sans"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="budget name" />
+        android:hint="Budget name" />
     <EditText
         android:id="@+id/BudgetLimit"
         android:inputType="textPassword"
@@ -21,7 +22,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif"
-        android:hint="budget limit"/>
+        android:fontFamily="@font/nunito_sans"
+        android:hint="Budget limit"/>
 
 </LinearLayout>

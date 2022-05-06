@@ -3,10 +3,16 @@ package com.example.cs160cashew;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category implements Parcelable {
 
     String name = "untitled";
     int spending = 0;
+
+    private List<Transaction> transactionList = new ArrayList<Transaction>();
+
 
     Category(String s){
         name = s;
@@ -15,6 +21,7 @@ public class Category implements Parcelable {
     protected Category(Parcel in) {
         name = in.readString();
         spending = in.readInt();
+        transactionList = in.createTypedArrayList(Transaction.CREATOR);
     }
 
     public static final Creator<Category> CREATOR = new Creator<Category>() {
@@ -39,7 +46,13 @@ public class Category implements Parcelable {
 
         parcel.writeString(name);
         parcel.writeInt(spending);
+        parcel.writeTypedList(transactionList);
 
+    }
+
+    public void addTransaction(Transaction t){
+        transactionList.add(t);
+        spending += t.value;
     }
 
     public String getName() {
@@ -48,6 +61,10 @@ public class Category implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Transaction> getTransactionList(){
+        return transactionList;
     }
 
     public int getSpending() {
