@@ -8,17 +8,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.net.Inet4Address;
+import java.util.Calendar;
 
 public class BudgetPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
@@ -27,11 +32,17 @@ public class BudgetPage extends AppCompatActivity {
 
     Budget budget;
 
+    private int monthDay;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_layout);
 
-
+        LayoutInflater inflater = getLayoutInflater();
+        View warning_layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.warning_toast));
+        final Toast warning_toast = new Toast(getApplicationContext());
+        warning_toast.setGravity(Gravity.CENTER_VERTICAL, 0 ,0);
+        warning_toast.setDuration(Toast.LENGTH_SHORT);
+        warning_toast.setView(warning_layout);
 
         Intent intentApp = getIntent();
         //Intent prog = getIntent();
@@ -46,9 +57,22 @@ public class BudgetPage extends AppCompatActivity {
         TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
 
 
+        Calendar c = Calendar.getInstance();
+
+        monthDay = budget.getMonthDay();
+
+        if(monthDay > Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH))
+            monthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        if(monthDay == c.get(Calendar.DAY_OF_MONTH)){
+            budget.setProgress(budget.getLimit());
+        }
+
         welcomeText.setText(budget.getName());
         budgetLimit.setText("$" + budget.getLimit());
         budgetProgress.setText(("Progress: $" + budget.getProgress()));
+
+
 
 
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
@@ -116,18 +140,22 @@ public class BudgetPage extends AppCompatActivity {
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(BudgetPage.this);
 
+
                 input.setHint("Money spent.");
 
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
-
 
                 layout1.addView(input);
                 alertDialog.setView(layout1);
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Update", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        if (Double.parseDouble(input.getText().toString()) > budget.getProgress()) {
+                            warning_toast.show();
+                        }
                         budget.updateProgress(Double.parseDouble(input.getText().toString()));
                         budgetProgress.setText("Progress: $" + budget.getProgress());
+
                         //budget.addCategory(new Category(input.getText()
                         // .toString()));
                         //budgetListRecyclerView.setAdapter(mAdapter);

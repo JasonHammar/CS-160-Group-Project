@@ -29,7 +29,7 @@ public class UserTest extends junit.framework.TestCase{
 
     @Test
     public void testAddBudget() {
-        user.addBudget(new Budget("Test Budget", new Category("Test Category"), 240));
+        user.addBudget(new Budget("Test Budget", new Category("Test Category"), 240, 240.0, 4));
         assertNotEquals(user.getBudgetList(), testList);
     }
 }
