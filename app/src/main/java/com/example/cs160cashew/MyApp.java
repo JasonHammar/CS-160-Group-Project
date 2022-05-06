@@ -9,7 +9,8 @@ public class MyApp extends Application {
 
     private LogoutListener listener;
     private Timer timer;
-    private int seconds_logout = 60000;
+    //private int seconds_logout = 60000;
+    private int seconds_logout = 600000;
 
     public void startUserSession() {
         cancelTimer();
