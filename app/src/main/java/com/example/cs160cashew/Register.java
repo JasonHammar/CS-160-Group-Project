@@ -95,9 +95,28 @@ public class Register extends AppCompatActivity {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {
                        if(task.isSuccessful()){
+
+                           User user = new User(mFullName.getText().toString());
                            Toast.makeText(Register.this,"User created",Toast.LENGTH_SHORT).show();
+/*
+                           Intent loginIntent = null;
+                           try{
+                               loginIntent = new Intent(getApplicationContext(), MainActivity.class);
+                               loginIntent.putExtra("user", user);
+                               startActivityForResult(loginIntent, 000);
+
+                           }
+                           catch (Exception e) {
+
+                               System.out.println(e);
+
+
+                           }
+
+*/
                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                            sendEmailVerification();
+
                        }
                        else{
                            Toast.makeText(Register.this,"Error occur" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();

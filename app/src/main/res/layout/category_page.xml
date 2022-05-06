@@ -5,21 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-    android:background="@drawable/background"
     android:weightSum="20">
-
 
     <TextView
         android:id="@+id/WelcomeText"
         android:layout_width="wrap_content"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center_vertical"
-        android:layout_weight="1"
-        android:fontFamily="@font/nunito_sans"
+        android:padding="20dp"
         android:text="WelcomeText"
-        android:textSize="40sp"
+        android:textSize="34sp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -30,13 +26,12 @@
     <TextView
         android:id="@+id/budgetLimit"
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:fontFamily="@font/nunito_sans"
         android:padding="10dp"
         android:text="$0"
-        android:textSize="40sp"
+        android:textSize="48sp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,29 +40,26 @@
         app:layout_constraintVertical_bias="0.105" />
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_budget_list"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
         android:layout_weight="18"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-
     <Button
-        android:id="@+id/editBudget"
+        android:id="@+id/editCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_weight="1"
-        android:fontFamily="@font/nunito_sans"
-        android:backgroundTint="@color/beige"
-        android:text="Edit Budget"
-        android:textColor="@color/brown"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        android:text="Edit Category Name" />
+
+
 
     <LinearLayout
         android:layout_weight="1"
@@ -76,33 +68,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <Button
-            android:id="@+id/addCategoryButton"
+            android:id="@+id/addTransactionButton"
             android:layout_width="181dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="2dp"
             android:layout_weight="25"
-            android:textColor  = "@color/brown"
-            android:fontFamily="@font/nunito_sans"
-            android:text="Add Category"
-            android:textSize="12dp" />
+            android:text="Add Transaction"
+            android:textSize="14dp" />
 
 
 
         <Button
             android:id="@+id/back"
-            android:layout_width="105dp"
+            android:layout_width="135dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:textColor  = "@color/brown"
-            android:fontFamily="@font/nunito_sans"
-            android:text="Back"
-            android:textSize="12dp" />
+            android:text="x"
+            android:textSize="14dp" />
 
     </LinearLayout>
 </LinearLayout>

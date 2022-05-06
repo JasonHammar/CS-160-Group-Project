@@ -49,9 +49,13 @@
         <activity android:name=".HomePage" />
         <activity android:name=".BudgetPage" />
 
+        <activity android:name=".CategoryPage" />
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>
