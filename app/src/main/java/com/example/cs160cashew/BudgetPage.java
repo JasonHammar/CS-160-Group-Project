@@ -53,16 +53,7 @@ public class BudgetPage extends AppCompatActivity {
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         budgetLimit = (TextView) findViewById(R.id.budgetLimit);
 
-        Calendar c = Calendar.getInstance();
 
-        monthDay = budget.getMonthDay();
-
-        if(monthDay > Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH))
-            monthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        if(monthDay == c.get(Calendar.DAY_OF_MONTH)){
-            budget.setProgress(budget.getLimit());
-        }
 
         welcomeText.setText(budget.getName());
         budgetLimit.setText("$" + budget.amountSpent() + " / $" + budget.getLimit());

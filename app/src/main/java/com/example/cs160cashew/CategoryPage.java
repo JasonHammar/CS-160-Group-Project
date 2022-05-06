@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Calendar;
+
 public class CategoryPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -51,7 +53,17 @@ public class CategoryPage extends AppCompatActivity {
 
 
         budgetListRecyclerView.setAdapter(mAdapter);
+        Calendar c = Calendar.getInstance();
 
+        int monthDay = Budget.monthDay;
+        System.out.println("Day of month: " + monthDay);
+
+        if(monthDay > Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH))
+            monthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
+        if(monthDay == c.get(Calendar.DAY_OF_MONTH)){
+            category.setSpending(0);
+
+        }
 
         Button addButton = (Button) findViewById(R.id.addTransactionButton);
         addButton.setOnClickListener(new View.OnClickListener() {

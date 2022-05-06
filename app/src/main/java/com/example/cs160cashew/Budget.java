@@ -12,7 +12,7 @@ public class Budget implements Parcelable {
     private List<Category> categoryList = new ArrayList<Category>();
     private int limit;
     private double progress;
-    private int monthDay;
+    public static int monthDay;
 
     public int didReset;
     Budget(String n, Category c, int l, double p, int m){
