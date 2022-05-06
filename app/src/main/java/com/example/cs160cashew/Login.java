@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +73,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+/*
                             Toast.makeText(Login.this,"User logged in successfully",Toast.LENGTH_SHORT).show();
                             Intent loginIntent = null;
                             try{
@@ -87,6 +89,11 @@ public class Login extends AppCompatActivity {
 
 
                             }
+*/
+                          Toast.makeText(Login.this,"User logged in successfully",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            checkEmailVerification();
+
                         }
                         else {
                             Toast.makeText(Login.this,"Error occur" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -142,6 +149,22 @@ public class Login extends AppCompatActivity {
                 passwordResetDialog.create().show();
             }
         });
-
     }
+
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser=fAuth.getInstance().getCurrentUser();
+        Boolean emailflag=firebaseUser.isEmailVerified();
+        if(emailflag)
+        {
+            finish();
+            Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Login.this,MainActivity.class));
+        }
+        else
+        {
+            Toast.makeText(this,"Please verify your email, thank you.",Toast.LENGTH_LONG).show();
+            fAuth.signOut();
+        }
+    }
+
 }
