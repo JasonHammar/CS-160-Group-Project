@@ -19,6 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
+import com.google.firebase.auth.FirebaseUser;
+
+
 public class Register extends AppCompatActivity {
     EditText mFullName, mEmail, mPassword, mPhone;
     Button mRegisterBtn;
@@ -49,6 +56,7 @@ public class Register extends AppCompatActivity {
         mRegisterBtn.setOnClickListener (new View.OnClickListener() {
            @Override
             public void onClick(View v){
+
               String email = mEmail.getText().toString().trim();
               String password = mPassword.getText().toString().trim();
 
@@ -67,6 +75,18 @@ public class Register extends AppCompatActivity {
                }
 
 
+               String name = mFullName.getText().toString().trim();
+               String phone = mPhone.getText().toString().trim();
+
+               HashMap<String, Object> map = new HashMap<>();
+               map.put("Name", name);
+               map.put("Email", email);
+               map.put("Phone", phone);
+
+               FirebaseDatabase.getInstance().getReference().child("User Info").push().updateChildren(map);
+
+
+
 
 
                //register the user to firebase
@@ -77,6 +97,7 @@ public class Register extends AppCompatActivity {
                        if(task.isSuccessful()){
                            Toast.makeText(Register.this,"User created",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                           sendEmailVerification();
                        }
                        else{
                            Toast.makeText(Register.this,"Error occur" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
@@ -92,5 +113,29 @@ public class Register extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
+    }
+
+    private void sendEmailVerification()
+    {
+        FirebaseUser firebaseUser=fAuth.getCurrentUser();
+        if(firebaseUser!=null)
+        {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                    {
+                        Toast.makeText(Register.this,"Registration Successful.Verification mail sent successfully..",Toast.LENGTH_LONG).show();
+                        fAuth.signOut();
+                        finish();
+                        startActivity(new Intent(Register.this,Login.class));
+                    }
+                    else
+                    {
+                        Toast.makeText(Register.this,"Error occurred sending verification mail..",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 }

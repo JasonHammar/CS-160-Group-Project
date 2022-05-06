@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class HomePage extends BaseActivity{
 
@@ -38,6 +41,7 @@ public class HomePage extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
+
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
         welcomeText.setText("Welcome " + user.getName() + "!");
 
@@ -50,6 +54,8 @@ public class HomePage extends BaseActivity{
         mAdapter = new MyAdapter(user.getBudgetList());
 
         budgetListRecyclerView.setAdapter(mAdapter);
+
+        
 
         Button addButton = (Button) findViewById(R.id.addBudgetButton);
         addButton.setOnClickListener(new View.OnClickListener() {
