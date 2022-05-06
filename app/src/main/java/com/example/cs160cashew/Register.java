@@ -3,7 +3,9 @@ package com.example.cs160cashew;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -40,6 +42,7 @@ public class Register extends AppCompatActivity {
 
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             finish();
         }
 
@@ -64,7 +67,11 @@ public class Register extends AppCompatActivity {
                    return;
                }
 
+
+
+
                //register the user to firebase
+
                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                    @Override
                    public void onComplete(@NonNull Task<AuthResult> task) {
