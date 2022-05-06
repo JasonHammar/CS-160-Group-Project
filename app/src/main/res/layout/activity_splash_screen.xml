@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/white"
     tools:context=".SplashScreenActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/cashew1"/>
+        android:layout_width="244dp"
+        android:layout_height="230dp"
+        android:src="@drawable/cashew1" />
 
     <TextView
         android:id="@+id/appName"
@@ -21,8 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Cashew"
-        android:textColor="#000"
-        android:textSize="30sp"
+        android:fontFamily="@font/nunito_sans"
+        android:textColor="@color/brown"
+        android:textSize="45sp"
         android:textStyle="bold" />
 
 </LinearLayout>
