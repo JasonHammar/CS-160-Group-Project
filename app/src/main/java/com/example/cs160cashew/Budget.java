@@ -33,6 +33,15 @@ public class Budget implements Parcelable {
         limit = i;
     }
 
+    public int amountSpent(){
+        int sum = 0;
+        for(int i = 0; i < categoryList.size(); i++){
+            sum += categoryList.get(i).spending;
+        }
+
+        return sum;
+    }
+
     protected Budget(Parcel in) {
 
         name = in.readString();

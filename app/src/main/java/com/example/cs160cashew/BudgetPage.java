@@ -22,34 +22,25 @@ import java.net.Inet4Address;
 
 public class BudgetPage extends AppCompatActivity {
     private RecyclerView budgetListRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private MySecondAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     Budget budget;
+    TextView budgetLimit;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_layout);
 
 
-
         Intent intentApp = getIntent();
-        //Intent prog = getIntent();
         budget = intentApp.getParcelableExtra("budgetItem");
-        //String progressOne;
-        //progressOne = prog.getStringExtra("budgetProgress");
-
-        //double progressTwo = Double.parseDouble(progressOne);
 
         TextView welcomeText = (TextView) findViewById(R.id.WelcomeText);
-        TextView budgetLimit = (TextView) findViewById(R.id.budgetLimit);
-        TextView budgetProgress = (TextView) findViewById(R.id.budgetProgress);
-
+        budgetLimit = (TextView) findViewById(R.id.budgetLimit);
 
         welcomeText.setText(budget.getName());
-        budgetLimit.setText("$" + budget.getLimit());
-        budgetProgress.setText(("Progress: $" + budget.getProgress()));
-
+        budgetLimit.setText("$" + budget.amountSpent() + " / $" + budget.getLimit());
 
         budgetListRecyclerView = (RecyclerView) findViewById(R.id.my_budget_list);
 
@@ -63,7 +54,6 @@ public class BudgetPage extends AppCompatActivity {
         budgetListRecyclerView.setAdapter(mAdapter);
 
         Button addButton = (Button) findViewById(R.id.addCategoryButton);
-        Button updateProgress = (Button) findViewById(R.id.updateProgress);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,32 +95,49 @@ public class BudgetPage extends AppCompatActivity {
         });
 
 
-        updateProgress.setOnClickListener(new View.OnClickListener() {
+        Button editButton = (Button) findViewById(R.id.editBudget);
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 AlertDialog alertDialog = new AlertDialog.Builder(BudgetPage.this).create();
-                alertDialog.setTitle("How much money did you spend?");
+                alertDialog.setTitle("Edit Budget");
 
                 LinearLayout layout1 = new LinearLayout(BudgetPage.this);
                 layout1.setOrientation(LinearLayout.VERTICAL);
                 final EditText input = new EditText(BudgetPage.this);
+                final EditText input2 = new EditText(BudgetPage.this);
 
-                input.setHint("Money spent.");
 
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                input.setHint(budget.getName());
+                input2.setHint(Integer.toString(budget.getLimit()));
+
+
+
+
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                input2.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+
 
 
                 layout1.addView(input);
+                layout1.addView(input2);
                 alertDialog.setView(layout1);
 
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Update", new DialogInterface.OnClickListener() {
+
+
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        budget.updateProgress(Double.parseDouble(input.getText().toString()));
-                        budgetProgress.setText("Progress: $" + budget.getProgress());
-                        //budget.addCategory(new Category(input.getText()
-                        // .toString()));
-                        //budgetListRecyclerView.setAdapter(mAdapter);
+                        if(!TextUtils.isEmpty(input.getText().toString())){
+                            budget.setName(input.getText().toString());
+                            welcomeText.setText(budget.getName());
+                        }
+                        if(!TextUtils.isEmpty(input2.getText().toString())){
+                            budget.setLimit(Integer.parseInt(input2.getText().toString()));
+                            budgetLimit.setText("$" + budget.getLimit());
+                        }
 
                     }
                 });
@@ -142,16 +149,21 @@ public class BudgetPage extends AppCompatActivity {
                     }
                 });
 
+
+
+
                 alertDialog.show();
 
 
             }
+
+
         });
-        
-        
 
 
-        
+
+
+
 
 
 
@@ -170,6 +182,23 @@ public class BudgetPage extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 333 && resultCode == Activity.RESULT_OK){
+            mAdapter.onActivityResult(requestCode, resultCode, data);
+            budgetListRecyclerView.setAdapter(mAdapter);
+            budgetLimit.setText("$" + budget.amountSpent() + " / $" + budget.getLimit());
+        }
+
+
+        mAdapter.onActivityResult(requestCode, resultCode, data);
+        budgetListRecyclerView.setAdapter(mAdapter);
+    }
+
 
 
 }
+
+
