@@ -11,11 +11,13 @@ public class User implements Parcelable {
     //private BankAccount bankAccount = new BankAccount();
     private List<Budget> budgetList = new ArrayList<Budget>();
 
+    public User(){
 
+    }
     User(String s){
         name = s;
-        budgetList.add(new Budget("Food Budget", new Category("testCategory"), 300, 300));
-        budgetList.add(new Budget("Miscellaneous", new Category("testCategory2"), 500, 500));
+        budgetList.add(new Budget("Food Budget",300, 300, 1));
+        budgetList.add(new Budget("Miscellaneous",500, 500, 1));
     }
 
     protected User(Parcel in) {
