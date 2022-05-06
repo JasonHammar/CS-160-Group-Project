@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:backgroundTint="@color/white"
     tools:context=".MainActivity">
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/cashew1"/>
+        android:layout_width="244dp"
+        android:layout_height="230dp"
+        android:src="@drawable/cashew1" />
 
     <TextView
         android:id="@+id/appName"
@@ -19,7 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Cashew"
-        android:textColor="#000"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textColor="@color/brown"
+        android:fontFamily="@font/nunito_sans"
         android:textSize="45sp"
         android:textStyle="bold" />
 
@@ -28,15 +32,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="logout"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="LOGIN"
+        android:backgroundTint="@color/beige"
+        android:fontFamily="@font/nunito_sans"
+        android:textColor="@color/brown"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:backgroundTint="@color/beige"
+        android:fontFamily="@font/nunito_sans"
         android:onClick="logout"
         android:text="Logout"
+        android:textColor="@color/brown"
         android:textSize="20sp" />
 
     <Button
