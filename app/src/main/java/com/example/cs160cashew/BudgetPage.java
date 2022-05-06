@@ -150,11 +150,11 @@ public class BudgetPage extends AppCompatActivity {
 
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Update", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        budget.updateProgress(Double.parseDouble(input.getText().toString()));
-                        budgetProgress.setText("Progress: $" + budget.getProgress());
                         if (Double.parseDouble(input.getText().toString()) > budget.getProgress()) {
                             warning_toast.show();
                         }
+                        budget.updateProgress(Double.parseDouble(input.getText().toString()));
+                        budgetProgress.setText("Progress: $" + budget.getProgress());
 
                         //budget.addCategory(new Category(input.getText()
                         // .toString()));
